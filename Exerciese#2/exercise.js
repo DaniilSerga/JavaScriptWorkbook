@@ -108,3 +108,56 @@ function OperationChoise(operation) {
             break;
     }
 }
+
+// #4: Расчёт объёма куба по длине ребра (исп. стрелочные ф-ии)
+
+let length = 5;
+
+let getVolume = x => x**3;
+
+console.log(`\nОбъём куба при длине ребра 5: ${getVolume(5)}\n`);
+
+// #5: Переименовать пользователя
+let user = { name: 'Даниил' };
+
+console.log(`До того как смнил имя: ${user.name}`)
+
+rename(user, 'Антон');
+
+console.log(`После того как сменил имя: ${user.name}\n`);
+
+function rename(user, providedName) {
+    user.name = providedName;
+}
+
+// #6: Рассчитать последовательно число в степенях 2, 3, 4 (исп. переопределение метода)
+
+calculatePowerOfNumber(2);
+calculatePowerOfNumber(2);
+calculatePowerOfNumber(2);
+
+function calculatePowerOfNumber(num) {
+    console.log(`${num}^2 = ${num **= 2}`);
+
+    calculatePowerOfNumber = function(num) {
+        console.log(`${num}^3 = ${num **= 3}`);
+
+        calculatePowerOfNumber = function(num) {
+            console.log(`${num}^4 = ${num **= 4}`);
+        }
+    }
+}
+
+// #7: Рекурсивно посчитать сумму ряда
+
+let sumNumber = 5;
+
+console.log(`\nCумма ряда из 5 = ${sumRecursively(sumNumber)}`);
+
+function sumRecursively(num) {
+    if (num == 1) {
+        return num;
+    }
+
+    return num + sumRecursively(num - 1);
+}
