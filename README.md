@@ -11,4 +11,6 @@
 2) Функциональное программирование (функции, возвращение значение и т.д.)
 
 ## ✨Источники
-Источником для изучения взят сайт [metanit](https://metanit.com/web/javascript/1.1.php)
+Источником для изучения были взяты сайты: 
++ [Metanit](https://metanit.com/web/javascript/1.1.php)
++ [Современный учебник JavaScript](https://learn.javascript.ru/)
