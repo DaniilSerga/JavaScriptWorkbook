@@ -128,3 +128,40 @@ const person = Object.fromEntries(personData);
 console.log(person);
 // John 18
 console.log(person.name, person.age);
+
+// ВЛОЖЕННЫЕ ОБЪЕКТЫ И МАССИВЫ В ОБЪЕКТАХ
+let country = {
+    name: 'Германия',
+    language: 'Немецкий',
+    capital: {
+        name: 'Берлин',
+        population: 3375000,
+        foundingYear: 1237
+    }
+};
+
+console.log('Столица: ' + country.capital.name);
+console.log('Население: ' + country["capital"]["population"]);
+console.log('Год основания: ' + country.capital["foundingYear"]);
+
+let teacherObj = {
+    name: 'Джон',
+    age: 49,
+    subjects: [
+        { name: 'Математика', studentsAmount: 16 },
+        { name: 'Астрономия', studentsAmount: 9 },
+        { name: 'Физика', studentsAmount: 13 }
+    ],
+    info() {
+        console.log('\nИНФОРМАЦИЯ О ПРЕПОДАВАТЕЛЕ');
+        console.log('Имя: ' + this["name"]);
+        console.log('Возраст: ' + this["age"]);
+
+        for (let i = 0; i < this.subjects.length; i++) {
+            console.log(`${i + 1}) Предмет: ${this.subjects[i]["name"]}, Кол-во студентов: ${this.subjects[i]["studentsAmount"]}`);
+        }
+    }
+}
+
+teacherObj.info();
+
