@@ -69,3 +69,38 @@ employer.addEmployee({ name: 'Иван', age: 18 });
 employer.countEmployees();
 employer.changeCompanyName('Клиренс');
 console.log(`Название компании: ${employer["company name"]}`);
+
+// #3: Существует 2 идентичных конструктора: бездомный и рабочий. Случайным образом объект принимает
+// значение одного из двух конструкторов. Затем, в зависимости от конструктора, от которого был создан
+// объект, выводится соответствующий текст.
+
+function Homeless(name, age, sex) {
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
+    this.getInfo = function() {
+        console.log(`Имя: ${this.name},\nВозраст: ${this.age}\nПол: ${this.sex}`);
+    }
+}
+
+function Worker(name, age, sex) {
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
+    this.getInfo = function() {
+        console.log(`Имя: ${this.name},\nВозраст: ${this.age}\nПол: ${this.sex}`);
+    }
+}
+
+let choise = Math.floor(Math.random() * 2); // генерация случайного числа от 0 до 2 (0, 1)
+
+let person = choise == 1 ? new Homeless('Стив', 34, 'Мужской') : new Worker('Питер', 21, 'Мужской');
+
+if (person instanceof Homeless) {
+    console.log('\nК сожалению, вы не смогли устроиться на работу. Теперь вы бездомный ):');
+    person.getInfo();
+}
+else if (person instanceof Worker) {
+    console.log('\nПоздравляем, вы устроились на работу, теперь вы можете позволить себе жильё!');
+    person.getInfo();
+}
