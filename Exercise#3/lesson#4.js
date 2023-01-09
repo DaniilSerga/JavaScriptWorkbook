@@ -57,3 +57,37 @@ let user_3 = new User('Катя', 20, car);
 
 console.log(user_3 instanceof User) // true, т.к. user_3 был создан с помощью конструктора User
 console.log(car instanceof User)    // false, т.к. car не был создан с помощью конструктора User
+
+console.log('');
+// ------РАСШИРЕНИЕ ОБЪЕКТОВ. Proptotype в JavaScript------
+/*
+Кроме непосредственного определения свойств и методов в конструкторе мы также можем использовать свойство 
+prototype. Каждая функция имеет свойство prototype, представляющее прототип функции. 
+То есть свойство User.prototype представляет прототип объектов User. И любые свойства и методы, 
+которые будут определены в User.prototype, будут общими для всех объектов User.
+*/
+function Human(name, age) {
+    this.name = name;
+    this.age = age;
+    this.displayInfo = function() {
+        console.log(`Имя: ${this.name}, Возраст: ${this.age}`);
+    }
+}
+
+// это статическое свойство и оно будет одинаковым для всех объектов, которые определяются этим конструктором
+Human.prototype.height = 173;
+// статическая функция
+Human.prototype.displayHeight = function() {
+    console.log(`Рост: ${this.height}`);
+}
+
+let person_1 = new Human('Георгий', 19);
+let person_2 = new Human('Виталий', 24);
+
+person_2.height = 184;
+
+person_1.displayInfo();   // Имя: Георгий, Возраст: 19
+person_1.displayHeight(); // 173
+person_2.displayInfo();   // Имя: Виталий, Возраст: 24
+person_2.displayHeight(); // 184
+
