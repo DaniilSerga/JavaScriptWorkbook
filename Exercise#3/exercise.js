@@ -104,3 +104,63 @@ else if (person instanceof Worker) {
     console.log('\nПоздравляем, вы устроились на работу, теперь вы можете позволить себе жильё!');
     person.getInfo();
 }
+
+console.log('');
+
+// #4: Необходимо создать конструктор с инкапсулированными свойствами и продемонстрировать их работу
+
+function Vehicle(name, price, releaseDate, vehicleType) {
+    let _name = name; // далее представлены инкапсулированные свойства, недоступные извне
+    let _price = price;
+    let _releaseDate = releaseDate;
+    let _vehicleType = vehicleType; 
+    this.getInfo = function() {
+        console.log(`Название ТС: ${_name},\nТип ТС: ${_vehicleType}\nСтоимость: ${_price},\nДата выхода на рынок: ${_releaseDate}\n`)
+    }
+}
+
+let vehicle_1 = new Vehicle('Honda', 20000, '11.07.2003', 'Легковой автомобиль');
+let vehicle_2 = new Vehicle('МАЗ', 35000, '14.05.2001', 'Грузовик');
+
+// Если попытаться получить доступ к любому из свойств объектов, то получим лишь undefined
+console.log(vehicle_1.name);
+
+// Для того чтобы получить значения объекта необходимо воспользоваться функцией в конструкторе, которая
+// обращается к свойствам и может получить их значения (т.к. находится внутри конструктора)
+vehicle_1.getInfo();
+/* 
+Название ТС: Honda,
+Тип ТС: Легковой автомобиль
+Стоимость: 20000,
+Дата выхода на рынок: 11.07.2003 */
+vehicle_2.getInfo();
+/* 
+Название ТС: МАЗ,
+Тип ТС: Грузовик
+Стоимость: 35000,
+Дата выхода на рынок: 14.05.2001 */
+
+// #5: Продемонстрировать работу функций call() и apply() на примере расчёта площади трапеции
+
+// В данной задаче я решил не задавать свойства верхнего и нижнего ребёр, чтобы в дальнейшем задать их в
+// функции. Поэтому оставил только высоту и функцию вывода информации о фигуре
+function Trapeze(height) {
+    this.height = height;
+    this.getInfo = function() {
+        console.log(`Высота фигуры: ${this.height}`);
+    }
+}
+
+function getTrapezeArea(upperEdge, lowerEdge) {
+    return ((this.height / 2) * (upperEdge + lowerEdge));   // расчёт площади трапеции
+}
+
+let trapeze_1 = new Trapeze(5);
+
+trapeze_1.getInfo();
+
+// Отличие apply от call заключается в том, что, в отличие от последнего, в первом параметры помимо 
+// объекта передаются как массив
+console.log(`Площадь трапеции v1.0: ${getTrapezeArea.call(trapeze_1, 15, 10)}`);
+console.log(`Площадь трапеции v1.0: ${getTrapezeArea.apply(trapeze_1, [15, 10])}`);
+
