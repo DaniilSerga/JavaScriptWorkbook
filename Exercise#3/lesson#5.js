@@ -54,5 +54,5 @@ function add(x, y){
 }
 
 var result = add.apply(null, [3, 8]);
- 
+
 console.log(result); // 11

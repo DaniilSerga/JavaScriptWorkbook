@@ -162,5 +162,47 @@ trapeze_1.getInfo();
 // Отличие apply от call заключается в том, что, в отличие от последнего, в первом параметры помимо 
 // объекта передаются как массив
 console.log(`Площадь трапеции v1.0: ${getTrapezeArea.call(trapeze_1, 15, 10)}`);
-console.log(`Площадь трапеции v1.0: ${getTrapezeArea.apply(trapeze_1, [15, 10])}`);
+console.log(`Площадь трапеции v2.0: ${getTrapezeArea.apply(trapeze_1, [15, 10])}`);
 
+console.log('');
+
+// #6: Необходимо создать 2 конструктора, где один из них наследует другой. Также необходимо наличие
+// переопределённой функции и прототипа
+
+function Person (name, age) {
+    this.name = name;
+    this.age = age;
+    this.getInfo = function() {
+        console.log(`Имя: ${this.name}, Возраст: ${this.age}, Язык общения: ${this.languageSpoken}`);
+    }
+}
+
+Person.prototype.languageSpoken = 'En';
+
+function Developer (name, age, salary) {
+    // Конструктор Developer наследует свойства Person. 
+    // Таким образом в функции getInfo() ниже (эта функция переопределена с прошлого конструктора) 
+    // мы можем обращаться к таким свойствам как name и age
+    Person.call(this, name, age); 
+    this.salary = salary;
+    this.getInfo = function() {
+        // свойств name и age явно в данном конструкторе не представлено, однако они присутствуют в предыдущем
+        // конструкторе, от которого текущий конструктор наследуется
+        console.log(`Имя: ${this.name}, Возраст: ${this.age}, Зарплата: ${this.salary}$, Язык общения: ${this.languageSpoken}`);
+    }
+    this.addSalary = function(salaryAdded) {
+        this.salary += salaryAdded;
+        console.log(`Зарплата разработчика ${this.name} была увеличена на ${salaryAdded}$ и составляет: ${this.salary}$`)
+    }
+}
+
+Developer.prototype = Object.create(Person.prototype);
+
+let person_1 = new Person('Клиф', 21);  
+let developer_1 = new Developer('Николай', 24, 500);    
+
+developer_1.languageSpoken = 'Ru';
+
+person_1.getInfo();     // Имя: Клиф, Возраст: 21
+developer_1.getInfo();  // Имя: Николай, Возраст: 24, Зарплата: 500$
+developer_1.addSalary(300); // Зарплата разработчика Николай была увеличена на 300 и составляет: 800$
